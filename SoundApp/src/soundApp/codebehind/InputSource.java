@@ -7,7 +7,7 @@ import javax.swing.border.*;
 import javax.swing.event.*;
 import java.io.*;
 import javax.sound.sampled.*;
-import javax.sound.*;
+
 
 public class InputSource implements Runnable{
 
