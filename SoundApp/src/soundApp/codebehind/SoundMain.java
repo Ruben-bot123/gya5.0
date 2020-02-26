@@ -1,11 +1,6 @@
 package soundApp.codebehind;
 
-
-
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SoundMain {
     //Form Controls
@@ -19,21 +14,14 @@ public class SoundMain {
     //Audio Source
     private InputSource inputSource;
     public SoundMain() {
-        buttonStart.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                labelMessage.setText("Start...");
-                inputSource.start();
-            }
+        buttonStart.addActionListener(e -> {
+            labelMessage.setText("Start...");
+            inputSource.start();
         });
-        buttonStop.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        buttonStop.addActionListener(e -> {
 
-                labelMessage.setText("Stop...");
-                inputSource.stop();
-            }
-
+            labelMessage.setText("Stop...");
+            inputSource.stop();
         });
 
         //The plot Canvas is where we plot the result
