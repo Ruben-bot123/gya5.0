@@ -141,12 +141,12 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver{
         g.drawString(new Integer(levelSpec()).toString(),40,40);
     }
 
-    /*
+    /**
      * levelSpec() - returns an int computed by averaging the spec vector
      * 	i.e. the average amplitude across the frequency info
      * 	returned by the fft
      *
-     **********************/
+     */
     public int levelSpec(){
         int avg=0;
         for(int i=0;i<spec.length;i++){
@@ -155,11 +155,11 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver{
         return avg/8192;
     }
 
-    /*
+    /**
      * sendData() - computes fft on the float array and repaints the
      * 	display
      *
-     ****************************************/
+     */
     public void sendData(float[] b, int len){
         data = b;
         //PCM Audio IN
@@ -168,5 +168,20 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver{
         spec = fft.fftMag(b);
         //Spec r privat array, rita om
         repaint();
+        testaSkit();
+    }
+
+    private void testaSkit() {
+        float högstvolym=0;
+        int högstaton = 0;
+        for (int i = 23; i < 46; i++) {
+            if (spec[i]>högstvolym)
+                högstvolym = spec[i];
+        }
+        for (int i = 23; i < 46; i++) {
+            if (högstvolym == spec[i])
+                högstaton = i;
+        }
+        System.out.println(högstaton+ " "+ högstvolym);
     }
 }
