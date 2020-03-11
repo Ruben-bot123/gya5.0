@@ -2,6 +2,8 @@ package soundApp.codebehind;
 
 import javax.swing.*;
 
+import static java.lang.System.exit;
+
 public class SoundMain {
     //Form Controls
     private JButton buttonStart;
@@ -22,6 +24,7 @@ public class SoundMain {
 
             labelMessage.setText("Stop...");
             inputSource.stop();
+            exit(0);
         });
 
         //The plot Canvas is where we plot the result
