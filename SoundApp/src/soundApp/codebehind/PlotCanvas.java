@@ -2,6 +2,9 @@ package soundApp.codebehind;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver{
     Thread displayThread;
@@ -183,5 +186,6 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver{
                 högstaton = i;
         }
         System.out.println(högstaton+ " "+ högstvolym);
+
     }
 }
