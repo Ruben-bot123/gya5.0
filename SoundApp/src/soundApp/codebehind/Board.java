@@ -1,6 +1,6 @@
-package com.zetcode;
+package soundApp.codebehind;
 
-import com.zetcode.Shape.Tetrominoe;
+import soundApp.codebehind.Shape.Tetrominoe;
 
 import javax.swing.*;
 import java.awt.*;

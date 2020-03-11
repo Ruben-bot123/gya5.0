@@ -1,10 +1,10 @@
-package com.zetcode;
+package soundApp.codebehind;
 
 import javax.swing.*;
 import java.awt.*;
 
 /*
-Java com.zetcode.Shape.Tetris game clone
+Java soundApp.codebehind.Shape.Tetris game clone
 
 Author: Jan Bodnar
 Website: http://zetcode.com
@@ -27,7 +27,7 @@ public class Tetris extends JFrame {
         add(board);
         board.start();
 
-        setTitle("com.zetcode.Shape.Tetris");
+        setTitle("soundApp.codebehind.Shape.Tetris");
         setSize(200, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
