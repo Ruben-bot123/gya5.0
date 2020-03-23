@@ -40,7 +40,6 @@ public class Board extends JPanel {
             tone();
         });
         timer1.start();
-        //addKeyListener(new TAdapter());
     }
 
     /*
@@ -60,50 +59,47 @@ public class Board extends JPanel {
 
             return;
         }
-        boolean refresh = true;
-        //do {
-            //PlotCanvas plotCanvas = new PlotCanvas();
             int ton = Tetris.plotCanvas.testaSkit();
             System.out.println(ton);
             // Java 12 switch expressions
-            //if (ton == 23) pause();
         switch (ton){
+            case 23:
             case 24:
             case 25:
             case 26:
-                tryMove(curPiece, curX - 1, curY);
-                break;
             case 27:
             case 28:
             case 29:
+                tryMove(curPiece, curX - 1, curY);
+                break;
             case 30:
                 tryMove(curPiece, curX + 1, curY);
                 break;
             case 31:
-                tryMove(curPiece.rotateRight(), curX, curY);
-                break;
             case 32:
             case 33:
             case 34:
-            case 35:
-                tryMove(curPiece.rotateLeft(), curX, curY);
+                tryMove(curPiece.rotateRight(), curX, curY);
                 break;
+            case 35:
             case 36:
             case 37:
             case 38:
             case 39:
-                dropDown();
+                tryMove(curPiece.rotateLeft(), curX, curY);
                 break;
             case 40:
             case 41:
             case 42:
             case 43:
             case 44:
+                dropDown();
+                break;
             case 45:
+            case 46:
                 oneLineDown();
                 break;
         }
-        //} while(!refresh);
     }
 
     private int squareWidth() {

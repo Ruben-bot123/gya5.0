@@ -175,7 +175,6 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver{
         ANDREAS LYTTER
         testaSkit() körs ifrån klassen Board istället
          */
-        //testaSkit();
     }
 
     /*
