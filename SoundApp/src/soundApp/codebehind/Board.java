@@ -66,6 +66,8 @@ public class Board extends JPanel {
             case 23:
             case 24:
             case 25:
+                pause();
+                break;
             case 26:
             case 27:
             case 28:
