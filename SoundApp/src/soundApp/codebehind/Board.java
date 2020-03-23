@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.security.Key;
 
 public class Board extends JPanel {
 
@@ -23,6 +24,8 @@ public class Board extends JPanel {
     private JLabel statusbar;
     private Shape curPiece;
     private Tetrominoe[] board;
+    private Timer timer1;
+
 
     Board(Tetris parent) {
 
@@ -33,7 +36,74 @@ public class Board extends JPanel {
 
         setFocusable(true);
         statusbar = parent.getStatusBar();
-        addKeyListener(new TAdapter());
+        timer1 = new Timer(1000, e -> {
+            tone();
+        });
+        timer1.start();
+        //addKeyListener(new TAdapter());
+    }
+
+    /*
+    ANDREAS LYTTER
+    Jag tog bort er implementering av KeyListener och jobbade vidare med den här
+    metoden som verkar göra samma sak.
+    Utökade spannet för vad som är giltiga toner (om jag fattat rätt)
+    Tog bort paus (den ställer till det när man testar)
+    Tog bort loopen som gjorde attprogrammer inte kommer framåt, istället
+    förlitar vi oss på Timern som körs varje sekund via initBoard.
+    Ett problem är att vi bara kollar tonen en gång per sekund, oklart vilka konsekvenser det får.
+
+    Jag har försökt göra så lite som möjligt i er kod, så det finns mer arbete att göra :)
+     */
+    private void tone() {
+        if (curPiece.getShape() == Tetrominoe.NoShape) {
+
+            return;
+        }
+        boolean refresh = true;
+        //do {
+            //PlotCanvas plotCanvas = new PlotCanvas();
+            int ton = Tetris.plotCanvas.testaSkit();
+            System.out.println(ton);
+            // Java 12 switch expressions
+            //if (ton == 23) pause();
+        switch (ton){
+            case 24:
+            case 25:
+            case 26:
+                tryMove(curPiece, curX - 1, curY);
+                break;
+            case 27:
+            case 28:
+            case 29:
+            case 30:
+                tryMove(curPiece, curX + 1, curY);
+                break;
+            case 31:
+                tryMove(curPiece.rotateRight(), curX, curY);
+                break;
+            case 32:
+            case 33:
+            case 34:
+            case 35:
+                tryMove(curPiece.rotateLeft(), curX, curY);
+                break;
+            case 36:
+            case 37:
+            case 38:
+            case 39:
+                dropDown();
+                break;
+            case 40:
+            case 41:
+            case 42:
+            case 43:
+            case 44:
+            case 45:
+                oneLineDown();
+                break;
+        }
+        //} while(!refresh);
     }
 
     private int squareWidth() {
@@ -304,32 +374,6 @@ public class Board extends JPanel {
         } else {
 
             oneLineDown();
-        }
-    }
-
-    class TAdapter extends KeyAdapter {
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-
-            if (curPiece.getShape() == Tetrominoe.NoShape) {
-
-                return;
-            }
-
-            int keycode = e.getKeyCode();
-
-            // Java 12 switch expressions
-            switch (keycode) {
-
-                case KeyEvent.VK_P -> pause();
-                case KeyEvent.VK_LEFT -> tryMove(curPiece, curX - 1, curY);
-                case KeyEvent.VK_RIGHT -> tryMove(curPiece, curX + 1, curY);
-                case KeyEvent.VK_DOWN -> tryMove(curPiece.rotateRight(), curX, curY);
-                case KeyEvent.VK_UP -> tryMove(curPiece.rotateLeft(), curX, curY);
-                case KeyEvent.VK_SPACE -> dropDown();
-                case KeyEvent.VK_D -> oneLineDown();
-            }
         }
     }
 }
