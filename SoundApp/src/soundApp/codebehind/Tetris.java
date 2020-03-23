@@ -38,7 +38,19 @@ public class Tetris extends JFrame {
         return statusbar;
     }
 
+    /*
+    ANDREAS LYTTER
+    Ni skapade nya instanser av PlotCanvas.
+    Istället ska ni använda bara en instans.
+    Plockade ut den första insstansen som skapades och gjorde den
+    public static så att ni kan komma åt den överallt via
+    Tetris.plotCanvas
+     */
+    public static PlotCanvas plotCanvas;
     public static void main(String[] args) {
+        plotCanvas = new PlotCanvas();
+        InputSource inputSource = new InputSource(plotCanvas);
+        inputSource.start();
 
         EventQueue.invokeLater(() -> {
 

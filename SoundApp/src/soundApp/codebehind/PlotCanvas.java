@@ -171,21 +171,30 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver{
         spec = fft.fftMag(b);
         //Spec r privat array, rita om
         repaint();
-        testaSkit();
+        /*
+        ANDREAS LYTTER
+        testaSkit() körs ifrån klassen Board istället
+         */
+        //testaSkit();
     }
 
-    private void testaSkit() {
-        float högstvolym=0;
-        int högstaton = 0;
-        for (int i = 23; i < 46; i++) {
-            if (spec[i]>högstvolym)
+    /*
+    ANDREAS LYTTER
+    Detta är Ellas version av koden.
+     */
+    public int högstaton = 0;
+    public int testaSkit() {
+        float högstvolym = 0;
+
+        for (int i = 23; i < 47; i++) {
+            if (spec[i] > högstvolym)
                 högstvolym = spec[i];
         }
-        for (int i = 23; i < 46; i++) {
+        for (int i = 23; i < 47; i++) {
             if (högstvolym == spec[i])
                 högstaton = i;
         }
-        System.out.println(högstaton+ " "+ högstvolym);
-
+        System.out.println(högstaton + " " + högstvolym);
+        return högstaton;
     }
 }
