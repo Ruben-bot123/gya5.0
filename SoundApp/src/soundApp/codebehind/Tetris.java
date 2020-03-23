@@ -52,6 +52,8 @@ public class Tetris extends JFrame {
         InputSource inputSource = new InputSource(plotCanvas);
         inputSource.start();
 
+
+
         EventQueue.invokeLater(() -> {
 
             var game = new Tetris();
