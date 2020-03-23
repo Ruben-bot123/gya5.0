@@ -127,9 +127,11 @@ public class Board extends JPanel {
         clearBoard();
         newPiece();
 
-        int PERIOD_INTERVAL = 600;
-        timer = new Timer(PERIOD_INTERVAL, new GameCycle());
-        timer.start();
+
+            int PERIOD_INTERVAL = 600;
+            timer = new Timer(PERIOD_INTERVAL, new GameCycle());
+            timer.start();
+
     }
 
     private void pause() {
@@ -222,7 +224,7 @@ public class Board extends JPanel {
 
     private void pieceDropped() {
 
-        for (int i = 0; i < 4; i++) {
+        if (!isPaused){for (int i = 0; i < 4; i++) {
 
             int x = curX + curPiece.x(i);
             int y = curY - curPiece.y(i);
@@ -235,7 +237,7 @@ public class Board extends JPanel {
 
             newPiece();
         }
-    }
+    }}
 
     private void newPiece() {
 
@@ -255,29 +257,30 @@ public class Board extends JPanel {
 
     private boolean tryMove(Shape newPiece, int newX, int newY) {
 
-        for (int i = 0; i < 4; i++) {
+        if (!isPaused) {
+            for (int i = 0; i < 4; i++) {
 
-            int x = newX + newPiece.x(i);
-            int y = newY - newPiece.y(i);
+                int x = newX + newPiece.x(i);
+                int y = newY - newPiece.y(i);
 
-            if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
+                if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
 
-                return false;
+                    return false;
+                }
+
+                if (shapeAt(x, y) != Tetrominoe.NoShape) {
+
+                    return false;
+                }
             }
 
-            if (shapeAt(x, y) != Tetrominoe.NoShape) {
+            curPiece = newPiece;
+            curX = newX;
+            curY = newY;
 
-                return false;
-            }
-        }
+            repaint();
 
-        curPiece = newPiece;
-        curX = newX;
-        curY = newY;
-
-        repaint();
-
-        return true;
+        }return true;
     }
 
     private void removeFullLines() {
