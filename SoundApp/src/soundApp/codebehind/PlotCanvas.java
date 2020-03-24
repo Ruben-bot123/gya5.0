@@ -192,13 +192,15 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver 
                 if (spec[i] > högstvolym)
                     högstvolym = spec[i];
             }
-            for (int i = 23; i < 47; i++) {
-                if (högstvolym == spec[i])
-                    högstaton = i;
-            }
-            arr[j]=högstaton;
+            if (högstvolym >= 60)
+                for (int i = 23; i < 47; i++) {
+                    if (högstvolym == spec[i])
+                        högstaton = i;
+                }
+            else return 0;
+            arr[j] = högstaton;
         }
-        högstaton = mostFrequent(arr,arr.length);
+        högstaton = mostFrequent(arr, arr.length);
         //System.out.println(högstaton + " " + högstvolym);
 
         return högstaton;
@@ -208,20 +210,20 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver 
         Arrays.sort(arr);
         int max_count = 1, res = arr[0];
         int curr_count = 1;
-        for (int i = 1; i <n; i++) {
-            if(arr[i] == arr[i-1])
+        for (int i = 1; i < n; i++) {
+            if (arr[i] == arr[i - 1])
                 curr_count++;
             else {
-                if(curr_count > max_count){
+                if (curr_count > max_count) {
                     max_count = curr_count;
-                    res = arr[i-1];
+                    res = arr[i - 1];
                 }
-                curr_count=1;
+                curr_count = 1;
             }
         }
-        if (curr_count> max_count){
+        if (curr_count > max_count) {
             max_count = curr_count;
-            res = arr[n-1];
+            res = arr[n - 1];
         }
         return res;
     }
