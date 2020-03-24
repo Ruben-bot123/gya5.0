@@ -40,7 +40,6 @@ public class Board extends JPanel {
             tone();
         });
         timer1.start();
-        //addKeyListener(new TAdapter());
     }
 
     /*
@@ -60,50 +59,49 @@ public class Board extends JPanel {
 
             return;
         }
-        boolean refresh = true;
-        //do {
-            //PlotCanvas plotCanvas = new PlotCanvas();
             int ton = Tetris.plotCanvas.testaSkit();
             System.out.println(ton);
             // Java 12 switch expressions
-            //if (ton == 23) pause();
         switch (ton){
+            case 23:
             case 24:
             case 25:
-            case 26:
-                tryMove(curPiece, curX - 1, curY);
+                pause();
                 break;
+            case 26:
             case 27:
             case 28:
             case 29:
+                tryMove(curPiece, curX - 1, curY);
+                break;
             case 30:
                 tryMove(curPiece, curX + 1, curY);
                 break;
             case 31:
-                tryMove(curPiece.rotateRight(), curX, curY);
-                break;
             case 32:
             case 33:
             case 34:
-            case 35:
-                tryMove(curPiece.rotateLeft(), curX, curY);
+                tryMove(curPiece.rotateRight(), curX, curY);
                 break;
+            case 35:
             case 36:
             case 37:
             case 38:
             case 39:
-                dropDown();
+                tryMove(curPiece.rotateLeft(), curX, curY);
                 break;
             case 40:
             case 41:
             case 42:
             case 43:
             case 44:
+                dropDown();
+                break;
             case 45:
+            case 46:
                 oneLineDown();
                 break;
         }
-        //} while(!refresh);
     }
 
     private int squareWidth() {
@@ -129,9 +127,11 @@ public class Board extends JPanel {
         clearBoard();
         newPiece();
 
-        int PERIOD_INTERVAL = 600;
-        timer = new Timer(PERIOD_INTERVAL, new GameCycle());
-        timer.start();
+
+            int PERIOD_INTERVAL = 600;
+            timer = new Timer(PERIOD_INTERVAL, new GameCycle());
+            timer.start();
+
     }
 
     private void pause() {
@@ -224,7 +224,7 @@ public class Board extends JPanel {
 
     private void pieceDropped() {
 
-        for (int i = 0; i < 4; i++) {
+        if (!isPaused){for (int i = 0; i < 4; i++) {
 
             int x = curX + curPiece.x(i);
             int y = curY - curPiece.y(i);
@@ -237,7 +237,7 @@ public class Board extends JPanel {
 
             newPiece();
         }
-    }
+    }}
 
     private void newPiece() {
 
@@ -257,29 +257,30 @@ public class Board extends JPanel {
 
     private boolean tryMove(Shape newPiece, int newX, int newY) {
 
-        for (int i = 0; i < 4; i++) {
+        if (!isPaused) {
+            for (int i = 0; i < 4; i++) {
 
-            int x = newX + newPiece.x(i);
-            int y = newY - newPiece.y(i);
+                int x = newX + newPiece.x(i);
+                int y = newY - newPiece.y(i);
 
-            if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
+                if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
 
-                return false;
+                    return false;
+                }
+
+                if (shapeAt(x, y) != Tetrominoe.NoShape) {
+
+                    return false;
+                }
             }
 
-            if (shapeAt(x, y) != Tetrominoe.NoShape) {
+            curPiece = newPiece;
+            curX = newX;
+            curY = newY;
 
-                return false;
-            }
-        }
+            repaint();
 
-        curPiece = newPiece;
-        curX = newX;
-        curY = newY;
-
-        repaint();
-
-        return true;
+        }return true;
     }
 
     private void removeFullLines() {
