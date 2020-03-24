@@ -174,7 +174,6 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver 
         ANDREAS LYTTER
         testaSkit() körs ifrån klassen Board istället
          */
-        //testaSkit();
     }
 
     /*
@@ -185,7 +184,7 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver 
 
     public int testaSkit() {
         int arr[] = new int[5];
-        for (int j = 0; j < arr.length; j++) {
+        for (int j = 0; j < 5; j++) {
 
             float högstvolym = 0;
 
@@ -193,20 +192,14 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver 
                 if (spec[i] > högstvolym)
                     högstvolym = spec[i];
             }
-            if (högstvolym >= 60)
-                for (int i = 23; i < 47; i++) {
-                    if (högstvolym == spec[i])
-                        högstaton = i;
-                }
-            else{
-                continue;
+            for (int i = 23; i < 47; i++) {
+                if (högstvolym == spec[i])
+                    högstaton = i;
             }
-            //System.out.println(högstaton + " " + högstvolym);
-            arr[j] = högstaton;
+            arr[j]=högstaton;
         }
-
-        högstaton = mostFrequent(arr, arr.length);
-
+        högstaton = mostFrequent(arr,arr.length);
+        //System.out.println(högstaton + " " + högstvolym);
 
         return högstaton;
     }
@@ -215,20 +208,20 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver 
         Arrays.sort(arr);
         int max_count = 1, res = arr[0];
         int curr_count = 1;
-        for (int i = 1; i < n; i++) {
-            if (arr[i] == arr[i - 1])
+        for (int i = 1; i <n; i++) {
+            if(arr[i] == arr[i-1])
                 curr_count++;
             else {
-                if (curr_count > max_count) {
+                if(curr_count > max_count){
                     max_count = curr_count;
-                    res = arr[i - 1];
+                    res = arr[i-1];
                 }
-                curr_count = 1;
+                curr_count=1;
             }
         }
-        if (curr_count > max_count) {
+        if (curr_count> max_count){
             max_count = curr_count;
-            res = arr[n - 1];
+            res = arr[n-1];
         }
         return res;
     }

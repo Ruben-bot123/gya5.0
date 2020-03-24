@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.security.Key;
 
 public class Board extends JPanel {
 
@@ -22,7 +25,6 @@ public class Board extends JPanel {
     private Shape curPiece;
     private Tetrominoe[] board;
     private Timer timer1;
-    private int [] toneArray;
 
 
     Board(Tetris parent) {
@@ -34,7 +36,7 @@ public class Board extends JPanel {
 
         setFocusable(true);
         statusbar = parent.getStatusBar();
-        timer1 = new Timer(600, e -> tone());
+        timer1 = new Timer(300, e -> tone());
         timer1.start();
     }
 
@@ -55,10 +57,10 @@ public class Board extends JPanel {
 
             return;
         }
-        int ton = Tetris.plotCanvas.testaSkit();
-        System.out.println(ton);
-        // Java 12 switch expressions
-        switch (ton) {
+            int ton = Tetris.plotCanvas.testaSkit();
+            System.out.println(ton);
+            // Java 12 switch expressions
+        switch (ton){
             case 23:
             case 24:
             case 25:
@@ -124,9 +126,9 @@ public class Board extends JPanel {
         newPiece();
 
 
-        int PERIOD_INTERVAL = 600;
-        timer = new Timer(PERIOD_INTERVAL, new GameCycle());
-        timer.start();
+            int PERIOD_INTERVAL = 600;
+            timer = new Timer(PERIOD_INTERVAL, new GameCycle());
+            timer.start();
 
     }
 
@@ -220,22 +222,20 @@ public class Board extends JPanel {
 
     private void pieceDropped() {
 
-        if (!isPaused) {
-            for (int i = 0; i < 4; i++) {
+        if (!isPaused){for (int i = 0; i < 4; i++) {
 
-                int x = curX + curPiece.x(i);
-                int y = curY - curPiece.y(i);
-                board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
-            }
-
-            removeFullLines();
-
-            if (!isFallingFinished) {
-
-                newPiece();
-            }
+            int x = curX + curPiece.x(i);
+            int y = curY - curPiece.y(i);
+            board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
         }
-    }
+
+        removeFullLines();
+
+        if (!isFallingFinished) {
+
+            newPiece();
+        }
+    }}
 
     private void newPiece() {
 
@@ -278,8 +278,7 @@ public class Board extends JPanel {
 
             repaint();
 
-        }
-        return true;
+        }return true;
     }
 
     private void removeFullLines() {
