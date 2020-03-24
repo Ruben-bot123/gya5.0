@@ -198,8 +198,7 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver 
             }
             arr[j]=högstaton;
         }
-
-        högstaton = mostFrequent(arr,5);
+        högstaton = mostFrequent(arr,arr.length);
         //System.out.println(högstaton + " " + högstvolym);
 
         return högstaton;
