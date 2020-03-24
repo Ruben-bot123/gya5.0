@@ -57,10 +57,10 @@ public class Board extends JPanel {
 
             return;
         }
-            int ton = Tetris.plotCanvas.testaSkit();
-            System.out.println(ton);
-            // Java 12 switch expressions
-        switch (ton){
+        int ton = Tetris.plotCanvas.testaSkit();
+        System.out.println(ton);
+        // Java 12 switch expressions
+        switch (ton) {
             case 23:
             case 24:
             case 25:
@@ -73,9 +73,9 @@ public class Board extends JPanel {
                 tryMove(curPiece, curX - 1, curY);
                 break;
             case 30:
+            case 31:
                 tryMove(curPiece, curX + 1, curY);
                 break;
-            case 31:
             case 32:
             case 33:
             case 34:
@@ -126,9 +126,9 @@ public class Board extends JPanel {
         newPiece();
 
 
-            int PERIOD_INTERVAL = 600;
-            timer = new Timer(PERIOD_INTERVAL, new GameCycle());
-            timer.start();
+        int PERIOD_INTERVAL = 1000;
+        timer = new Timer(PERIOD_INTERVAL, new GameCycle());
+        timer.start();
 
     }
 
@@ -222,20 +222,22 @@ public class Board extends JPanel {
 
     private void pieceDropped() {
 
-        if (!isPaused){for (int i = 0; i < 4; i++) {
+        if (!isPaused) {
+            for (int i = 0; i < 4; i++) {
 
-            int x = curX + curPiece.x(i);
-            int y = curY - curPiece.y(i);
-            board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
+                int x = curX + curPiece.x(i);
+                int y = curY - curPiece.y(i);
+                board[(y * BOARD_WIDTH) + x] = curPiece.getShape();
+            }
+
+            removeFullLines();
+
+            if (!isFallingFinished) {
+
+                newPiece();
+            }
         }
-
-        removeFullLines();
-
-        if (!isFallingFinished) {
-
-            newPiece();
-        }
-    }}
+    }
 
     private void newPiece() {
 
@@ -278,7 +280,8 @@ public class Board extends JPanel {
 
             repaint();
 
-        }return true;
+        }
+        return true;
     }
 
     private void removeFullLines() {
