@@ -36,9 +36,7 @@ public class Board extends JPanel {
 
         setFocusable(true);
         statusbar = parent.getStatusBar();
-        timer1 = new Timer(1000, e -> {
-            tone();
-        });
+        timer1 = new Timer(300, e -> tone());
         timer1.start();
     }
 
