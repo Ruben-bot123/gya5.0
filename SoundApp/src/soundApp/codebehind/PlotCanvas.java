@@ -183,8 +183,8 @@ public class PlotCanvas extends JPanel implements Runnable, AudioStreamReceiver 
     public int högstaton = 0;
 
     public int testaSkit() {
-        int arr[] = new int[5];
-        for (int j = 0; j < 5; j++) {
+        int arr[] = new int[10];
+        for (int j = 0; j < 10; j++) {
 
             float högstvolym = 0;
 
