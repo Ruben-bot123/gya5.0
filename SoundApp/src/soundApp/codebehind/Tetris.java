@@ -27,7 +27,7 @@ public class Tetris extends JFrame {
         add(board);
         board.start();
 
-        setTitle("soundApp.codebehind.Shape.Tetris");
+        setTitle("Tetris");
         setSize(200, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

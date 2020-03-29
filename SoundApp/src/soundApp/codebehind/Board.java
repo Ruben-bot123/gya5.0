@@ -6,9 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.security.Key;
+
 
 public class Board extends JPanel {
 
@@ -24,7 +22,6 @@ public class Board extends JPanel {
     private JLabel statusbar;
     private Shape curPiece;
     private Tetrominoe[] board;
-    private Timer timer1;
 
 
     Board(Tetris parent) {
@@ -36,7 +33,7 @@ public class Board extends JPanel {
 
         setFocusable(true);
         statusbar = parent.getStatusBar();
-        timer1 = new Timer(300, e -> tone());
+        Timer timer1 = new Timer(300, e -> tone());
         timer1.start();
     }
 
